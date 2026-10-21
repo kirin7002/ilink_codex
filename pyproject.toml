@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ilink-codex"
+version = "0.1.0"
+description = "Personal Weixin iLink to Codex bridge"
+requires-python = ">=3.12"
+dependencies = ["weixin-ilink[qr]==0.3.5"]
+
+[project.scripts]
+ilink-codex = "ilink_codex.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

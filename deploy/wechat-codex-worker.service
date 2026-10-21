@@ -1,0 +1,26 @@
+[Unit]
+Description=Personal Weixin Codex worker
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=kirin
+WorkingDirectory=/home/kirin/wechat-codex
+Environment=PATH=/home/kirin/.local/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/home/kirin/wechat-codex/.venv/bin/ilink-codex --config /home/kirin/wechat-codex/config.toml worker
+Restart=on-failure
+RestartSec=5
+KillMode=control-group
+TimeoutStopSec=15
+UMask=0077
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/home/kirin/wechat-codex/state /home/kirin/wechat-codex/work /home/kirin/.codex
+PrivateTmp=true
+MemoryMax=2G
+CPUQuota=200%
+TasksMax=256
+
+[Install]
+WantedBy=multi-user.target

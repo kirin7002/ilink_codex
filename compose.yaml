@@ -1,0 +1,63 @@
+name: wechat-codex
+
+x-service: &service
+  image: ilink-codex:0.1.0
+  build:
+    context: .
+    target: runtime
+  init: true
+  restart: unless-stopped
+  read_only: true
+  user: "1000:1000"
+  cap_drop: [ALL]
+  security_opt:
+    - no-new-privileges:true
+  tmpfs:
+    - /tmp:rw,nosuid,nodev,size=256m,mode=1777
+  stop_grace_period: 50s
+  logging:
+    driver: json-file
+    options:
+      max-size: "10m"
+      max-file: "3"
+
+services:
+  bridge:
+    <<: *service
+    command: [bridge]
+    volumes:
+      - state:/data/state
+    mem_limit: 256m
+    cpus: 0.5
+    pids_limit: 64
+    healthcheck:
+      test: [CMD, ilink-codex, --config, /app/config.toml, health, bridge]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 45s
+
+  worker:
+    <<: *service
+    command: [worker]
+    security_opt:
+      - no-new-privileges:true
+      - seccomp=./deploy/codex-seccomp.json
+    volumes:
+      - state:/data/state
+      - work:/data/work
+      - codex-home:/home/app/.codex
+    mem_limit: 2g
+    cpus: 2
+    pids_limit: 256
+    healthcheck:
+      test: [CMD, ilink-codex, --config, /app/config.toml, health, worker]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  state:
+  work:
+  codex-home:

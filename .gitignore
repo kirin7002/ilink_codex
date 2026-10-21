@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.egg-info/
+build/
+dist/
+.coverage
+state/
+work/
+config.toml
+*.db*
+creds.json

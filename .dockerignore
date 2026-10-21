@@ -1,0 +1,15 @@
+*
+!Dockerfile
+!requirements.lock
+!pyproject.toml
+!src/
+!src/ilink_codex/
+!src/ilink_codex/*.py
+!tests/
+!tests/*.py
+!deploy/
+!deploy/docker-config.toml
+!deploy/sandbox-check.py
+!deploy/import-auth.py
+**/__pycache__/
+**/*.pyc

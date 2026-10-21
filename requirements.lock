@@ -1,0 +1,11 @@
+# Resolved on Python 3.12 / Linux. Install before the local package.
+certifi==2026.10.19
+cffi==2.1.1
+charset-normalizer==3.5.2
+cryptography==50.0.2
+idna==3.20
+pycparser==3.11
+qrcode==8.2
+requests==2.34.2
+urllib3==2.8.0
+weixin-ilink==0.3.5

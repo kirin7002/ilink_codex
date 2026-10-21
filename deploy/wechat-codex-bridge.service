@@ -1,0 +1,24 @@
+[Unit]
+Description=Personal Weixin Codex bridge
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=kirin
+WorkingDirectory=/home/kirin/wechat-codex
+ExecStart=/home/kirin/wechat-codex/.venv/bin/ilink-codex --config /home/kirin/wechat-codex/config.toml bridge
+Restart=on-failure
+RestartSec=5
+KillMode=control-group
+TimeoutStopSec=50
+UMask=0077
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/home/kirin/wechat-codex/state
+PrivateTmp=true
+MemoryMax=256M
+TasksMax=64
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,10 @@
+state_dir = "/data/state"
+work_dir = "/data/work"
+codex_bin = "/usr/local/bin/codex"
+max_concurrency = 1
+task_timeout = 600
+max_pending_per_user = 10
+max_prompt_chars = 16000
+reply_chunk_chars = 1000
+max_reply_chars = 12000
+max_send_attempts = 5
